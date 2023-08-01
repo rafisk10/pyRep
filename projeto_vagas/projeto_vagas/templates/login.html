@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+{%load static%}
+<html>
+<head>
+    <title>Login</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Login</h1>
+        {% if error_message %}
+        <p class="error-message" id="error-message">{{ error_message }}</p>
+        {% endif %}
+        <form method="post">
+            {% csrf_token %}
+            <label for="username">Usuário:</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="password">Senha:</label>
+            <input type="password" id="password" name="password" required>
+
+            <button type="submit">Entrar</button>
+            </br>
+            </br>
+        </form>
+
+        <a href="{% url 'cadastro' %}">
+            <button>Criar conta</button>
+        </a>
+    </div>
+
+    <script>
+        const errorMessage = document.getElementById('error-message');
+
+        if (errorMessage) {
+            setTimeout(() => {
+                errorMessage.style.display = 'none';
+            }, 5000);
+            errorMessage.style.color = 'red';
+        }
+    </script>
+</body>
+</html>

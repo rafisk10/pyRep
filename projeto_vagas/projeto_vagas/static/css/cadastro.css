@@ -1,0 +1,61 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f2f2f2;
+}
+
+.container {
+    text-align: center;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+h1 {
+    margin-top: 0;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cadastro-form {
+    display: none;
+}
+
+.toggle {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.toggle button {
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+}
+
+.toggle button:not(:last-child) {
+    margin-right: 10px;
+}
+
+button[type="submit"],#a{
+    margin-top: 10px;
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button[type="submit"]:hover {
+    background-color: #c82333;
+}

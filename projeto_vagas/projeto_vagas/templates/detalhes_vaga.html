@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+{%load static%}
+<html>
+<head>
+    <title>Detalhes da Vaga</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/detalhes_vaga.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Detalhes da Vaga: {{ vaga.nome }}</h1>
+        <p>Salário: {{ vaga.get_faixa_salarial_display }}</p>
+        <p>Escolaridade Mínima: {{ vaga.get_escolaridade_minima_display}}</p>
+        <div class="aplica_vaga">
+        <a href="{% url 'aplica_vaga' vaga.id %}">
+            <button>Candidatar-se</button>
+        </a>
+        </div>
+        
+        <h2>Candidatos Interessados</h2>
+        <div class="candidatos">
+            {% for candidato in candidatos %}
+            <div class="candidato">
+                <h3>{{ candidato.nome_candidato }}</h3>
+                <p>Faixa Salarial Desejada: {{ candidato.get_faixa_salarial_display }}</p>
+                <p>Escolaridade Mínima: {{ candidato.get_escolaridade_minima_display }}</p>
+            </div>
+            {% endfor %}
+
+        </div>
+        {% if mensagem %}
+            <p>{{ mensagem }}</p>
+            {% if pontuacao is not None %}
+                <p>Pontuação: {{ pontuacao }}</p>
+            {% endif %}
+        {% endif %}
+        
+        <a href="{% url 'vagas' %}">
+            <button>Voltar</button>
+        </a>
+    </div>
+    
+</body>
+</html>

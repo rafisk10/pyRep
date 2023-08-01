@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+
+
+<head>
+    <title>Cadastro</title>
+    
+    <link rel="stylesheet" type="text/css" href="{% static 'css/cadastro.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Cadastro</h1>
+        <div class="form">
+            <div class="toggle">
+                <button id="candidatoBtn" onclick="toggleForm('candidato')">Candidato</button>
+                <button id="empresaBtn" onclick="toggleForm('empresa')">Empresa</button>
+            </div>
+            <form id="candidatoForm" class="cadastro-form" action = "{% url 'cadastro' %}" method="POST">
+                {% csrf_token %}
+                <label for="usuario">Usuário:</label>
+                <input type="text" id="usuario" name="username" required>
+
+                <label for="email">E-mail:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" name="first_name" required>
+
+                <label for="sobrenome">Sobrenome:</label>
+                <input type="text" id="sobrenome" name="last_name" required>
+
+                <label for="senha">Senha:</label>
+                <input type="password" id="senha" name="password" required>
+
+                <label for="faixa_salarial">Faixa Salarial:</label>
+                <select id="faixa_salarial" name="faixa_salarial" required>
+                    <option value="" disabled selected>Selecione a faixa salarial</option>
+                    {% for choice in faixa_salarial_choices %}
+                        <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+                    {% endfor %}
+                </select>
+
+                <label for="escolaridade_minima">Escolaridade Mínima:</label>
+                <select id="escolaridade_minima" name="escolaridade_minima" required>
+                    <option value="" disabled selected>Selecione a escolaridade mínima</option>
+                    {% for choice in escolaridade_choices %}
+                        <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+                    {% endfor %}
+                </select>
+                <button type="submit">Cadastrar Candidato</button>
+            </form>
+
+            <form id="empresaForm" class="cadastro-form" action = "{% url 'cadastro' %}" method="POST">
+                {% csrf_token %}
+                <label for="usuario">Usuário:</label>
+                <input type="text" id="usuario" name="username" required>
+
+                <label for="email">E-mail:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="senha">Senha:</label>
+                <input type="password" id="senha" name="password" required>
+
+                <label for="nome_empresa">Nome da Empresa:</label>
+                <input type="text" id="nome_empresa" name="nome_empresa" required>
+
+                <button type="submit">Cadastrar Empresa</button>
+            </form>
+            <a href="{% url 'login' %}">
+                <button id = 'a'>Voltar</button>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        function toggleForm(formType) {
+            const candidatoForm = document.getElementById("candidatoForm");
+            const empresaForm = document.getElementById("empresaForm");
+            const candidatoBtn = document.getElementById("candidatoBtn");
+            const empresaBtn = document.getElementById("empresaBtn");
+
+
+            if (formType === "candidato") {
+                candidatoForm.style.display = "block";
+                empresaForm.style.display = "none";
+                candidatoBtn.disabled = true;
+                empresaBtn.disabled = false;
+            } else if (formType === "empresa") {
+                candidatoForm.style.display = "none";
+                empresaForm.style.display = "block";
+                candidatoBtn.disabled = false;
+                empresaBtn.disabled = true;
+            }
+        }
+    </script>
+</body>
+</html>

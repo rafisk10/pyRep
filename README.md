@@ -39,9 +39,6 @@ pip install -r requirements.txt
 
 ## Passo 5: Entrar no diretório do projeto
 ~~~
-cd ..(2x)
-~~~
-~~~
 cd projeto_vagas
 ~~~
 

@@ -5,35 +5,44 @@ Este é um projeto desenvolvido utilizando Django e Visual Studio Code (VSCode) 
 ## Passo 1: Clonar o Repositório
 
 Clone o repositório do projeto para o seu computador usando o comando:
+~~~
 git clone https://github.com/rafisk10/pyRep
+~~~
 
 ## Passo 2: Configurar o Ambiente Virtual
 
 Dentro da pasta do projeto, abra um terminal e crie um ambiente virtual utilizando o comando:
+~~~
 python -m venv nome-da-venv
-
+~~~
 
 ## Passo 3: Ativar o Ambiente Virtual
 
 Ative o ambiente virtual utilizando o comando apropriado para o seu sistema operacional:
 
 **Windows:**
+~~~
 nome-da-venv\Scripts\activate
-
+~~~
 
 **Linux / macOS:**
+~~~
 source nome-da-venv/bin/activate
-
+~~~
 
 ## Passo 4: Instalar Dependências
 
 Com o ambiente virtual ativado, instale as dependências do projeto, incluindo o Django, utilizando o comando:
+~~~
 pip install -r requirements.txt
+~~~
 
 ## Passo 5: Rodar o Servidor
 
 Inicie o servidor de desenvolvimento do Django com o comando:
+~~~
 python manage.py runserver
+~~~
 
 ## Passo 6: Acessar o Projeto
 

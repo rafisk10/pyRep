@@ -19,6 +19,7 @@ h1 {
 
 .form-group {
     margin-bottom: 15px;
+    text-decoration: none;
 }
 
 label {

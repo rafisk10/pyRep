@@ -9,6 +9,9 @@
     <div class="container">
         <h1>Vagas Disponíveis</h1>
         <div class="vagas">
+            {%if vaga == None%}
+            <p>{{aviso}}</p>
+            {%endif%}
             {% for vaga in vagas %}
             <div class="vaga">
                 <h2>{{ vaga.nome }}</h2>

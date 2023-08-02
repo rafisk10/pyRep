@@ -38,9 +38,16 @@
                 <button type="submit">Cadastrar Vaga</button>
             </div>
         </form>
-        <a href="{% url 'vagas_cadastradas' %} " class = 'voltar-link'>
+        {%if vagas%}
+        <a href="{% url 'vagas_cadastradas' %} " class = 'form-group'>
             <button>Voltar</button>
         </a>
+        <br>
+        {%else%}
+        <a href="{% url 'logout_view' %}" class = 'form-group'>
+            <button>Sair</button>
+        </a>
+        {%endif%}
     </div>
 </body>
 </html>

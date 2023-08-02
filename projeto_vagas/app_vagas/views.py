@@ -10,12 +10,17 @@ def home(request):
     return render(request, 'home.html')
 
 def vagas(request):
+    context= {}
     
     vagas_disponiveis = Vagas.objects.all()
     
-    context = {"vagas": vagas_disponiveis}
-    return render(request, 'vagas.html', context)
-
+    if vagas_disponiveis:
+        context = {"vagas": vagas_disponiveis}
+        return render(request, 'vagas.html', context)
+    else:
+        context['aviso'] = " Não ha vagas cadastradas ainda"
+        return render(request, 'vagas.html', context)
+        
 def detalhes_vaga(request, vaga_id):
     
 
@@ -72,7 +77,9 @@ def cad_vagas(request):
     hasattr(request.user, 'empresa')
     empresa_id = request.user.empresa.id
 
-    context = {'faixa_salarial_choices': FAIXA_SALARIAL_CHOICES, 'escolaridade_choices': ESCOLARIDADE_CHOICES}
+    tem_vagas = Vagas.objects.filter(empresa_id = empresa_id).all()
+    
+    context = {'faixa_salarial_choices': FAIXA_SALARIAL_CHOICES, 'escolaridade_choices': ESCOLARIDADE_CHOICES, 'vagas': tem_vagas}
     if request.method == 'GET':
         return render(request, 'cad_vagas.html', context)
     else:
@@ -118,8 +125,7 @@ def deleta_vaga(request, vaga_id):
     else:
         aviso = 'Erro ao excluir a vaga'
         return render(request, "detalhes_vaga_empresas.html", context)
-        
-    
+           
 @login_required
 def vagas_cadastradas(request):
     

@@ -53,7 +53,7 @@ class Vagas(models.Model):
             candidato = candidato_aplicado.candidato
             pontuacao = 0
 
-            if int(self.faixa_salarial) == candidato.faixa_salarial:
+            if int(self.faixa_salarial) <= candidato.faixa_salarial:
                 pontuacao += 1
 
             if candidato.escolaridade_minima >= int(self.escolaridade_minima):

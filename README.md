@@ -37,14 +37,30 @@ Com o ambiente virtual ativado, instale as dependências do projeto, incluindo o
 pip install -r requirements.txt
 ~~~
 
-## Passo 5: Rodar o Servidor
+## Passo 5: Entrar no diretório do projeto
+~~~
+cd ..(2x)
+~~~
+~~~
+cd projeto_vagas
+~~~
+
+## Passo 6: Criar o banco local da aplicação
+~~~
+py manage.py makemigrations 
+~~~
+~~~
+py manage.py mmigrate 
+~~~
+
+## Passo 7: Rodar o Servidor
 
 Inicie o servidor de desenvolvimento do Django com o comando:
 ~~~
 python manage.py runserver
 ~~~
 
-## Passo 6: Acessar o Projeto
+## Passo 8: Acessar o Projeto
 
 Abra o navegador web e acesse o seguinte endereço:
 ~~~

@@ -21,9 +21,7 @@
             </div>
             <form id="candidatoForm" class="cadastro-form" action = "{% url 'cadastro' %}" method="POST">
                 {% csrf_token %}
-                <label for="usuario">Usuário:</label>
-                <input type="text" id="usuario" name="username" required>
-
+            
                 <label for="email">E-mail:</label>
                 <input type="email" id="email" name="email" required>
 
@@ -56,8 +54,6 @@
 
             <form id="empresaForm" class="cadastro-form" action = "{% url 'cadastro' %}" method="POST">
                 {% csrf_token %}
-                <label for="usuario">Usuário:</label>
-                <input type="text" id="usuario" name="username" required>
 
                 <label for="email">E-mail:</label>
                 <input type="email" id="email" name="email" required>

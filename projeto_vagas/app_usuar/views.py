@@ -48,7 +48,6 @@ def cadastro(request):
     if request.method == "GET":
         return render(request, "cadastro.html", context)
     else:
-        username = request.POST.get("username")
         email = request.POST.get("email")
         nome = request.POST.get("first_name")
         senha = request.POST.get("password")
@@ -56,16 +55,14 @@ def cadastro(request):
         faixa_salarial_escolhida = request.POST.get("faixa_salarial")
         escolaridade_minima_escolhida = request.POST.get("escolaridade_minima")
 
-        user = User.objects.filter(username=username).first()
+        user = User.objects.filter(username=email).first()
         if user:
             context["aviso"] = "Usuario ja cadastrado"
             return render(request, "cadastro.html", context)
 
         if sobrenome is None:
             nome_empresa = request.POST.get("nome_empresa")
-            user = User.objects.create_user(
-                username=username, email=email, password=senha
-            )
+            user = User.objects.create_user(username=email, email=email, password=senha)
             empresa = Empresa.objects.create(user=user, nome_empresa=nome_empresa)
             empresa.save()
             return HttpResponseRedirect(reverse("login"))
@@ -73,7 +70,7 @@ def cadastro(request):
             sobrenome = request.POST.get("last_name")
             nome_candidato = nome + " " + sobrenome
             user = User.objects.create_user(
-                username=username,
+                username=email,
                 email=email,
                 first_name=nome,
                 last_name=sobrenome,

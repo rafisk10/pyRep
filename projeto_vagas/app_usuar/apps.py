@@ -2,5 +2,5 @@ from django.apps import AppConfig
 
 
 class AppUsuarConfig(AppConfig):
-    default_auto_field = 'django.db.models.BigAutoField'
-    name = 'app_usuar'
+    default_auto_field = "django.db.models.BigAutoField"
+    name = "app_usuar"

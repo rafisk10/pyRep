@@ -1,16 +1,45 @@
-° Fazer o donwload do zip contendo o projeto
+# Configuração do Projeto
 
-° Extrair a pasta para o local desejado
+Este é um projeto desenvolvido utilizando Django e Visual Studio Code (VSCode) como editor de código. Siga os passos abaixo para configurar o ambiente de desenvolvimento:
 
-° Abrir o vscode e posteriormente a pasta que foi extraida
+## Passo 1: Clonar o Repositório
 
-° Abra um terminal e inicie uma venv pelo comando "py -m venv ("nome da venv")
+Clone o repositório do projeto para o seu computador usando o comando:
+git clone https://github.com/rafisk10/pyRep
 
-° Agora voce vai iniciar a venv pelo caminho "("nome da venv")/scripts/activate"
+## Passo 2: Configurar o Ambiente Virtual
 
-° Após a Venv iniciada, voce vai rodar o comando "pip install django"
+Dentro da pasta do projeto, abra um terminal e crie um ambiente virtual utilizando o comando:
+python -m venv nome-da-venv
 
-° Com o django instalado, voce vai rodar o comando "py manage.py runserver" 
 
-° E por fim abrir o navegador e acessar o endereço "127.0.0.1:8000" 
+## Passo 3: Ativar o Ambiente Virtual
 
+Ative o ambiente virtual utilizando o comando apropriado para o seu sistema operacional:
+
+**Windows:**
+nome-da-venv\Scripts\activate
+
+
+**Linux / macOS:**
+source nome-da-venv/bin/activate
+
+
+## Passo 4: Instalar Dependências
+
+Com o ambiente virtual ativado, instale as dependências do projeto, incluindo o Django, utilizando o comando:
+pip install -r requirements.txt
+
+## Passo 5: Rodar o Servidor
+
+Inicie o servidor de desenvolvimento do Django com o comando:
+python manage.py runserver
+
+## Passo 6: Acessar o Projeto
+
+Abra o navegador web e acesse o seguinte endereço:
+http://127.0.0.1:8000/
+
+Agora você estará executando o projeto localmente no seu navegador.
+
+**Observação:** Lembre-se de substituir `"nome-da-venv"` pelo nome desejado para a sua virtual environment (ambiente virtual) ao longo do tutorial.

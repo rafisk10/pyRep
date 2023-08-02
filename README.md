@@ -38,7 +38,7 @@ python manage.py runserver
 ## Passo 6: Acessar o Projeto
 
 Abra o navegador web e acesse o seguinte endereço:
-http://127.0.0.1:8000/
+´´´http://127.0.0.1:8000/´´´
 
 Agora você estará executando o projeto localmente no seu navegador.
 

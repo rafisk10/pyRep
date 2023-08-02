@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from datetime import datetime
 
 FAIXA_SALARIAL_CHOICES = [
     (1, "Até 1.000"),
@@ -32,6 +33,8 @@ class Candidato(models.Model):
     faixa_salarial = models.IntegerField(choices=FAIXA_SALARIAL_CHOICES)
     escolaridade_minima = models.IntegerField(choices=ESCOLARIDADE_CHOICES)
 
+    
+
     def __str__(self):
         return self.nome_candidato
 
@@ -42,7 +45,8 @@ class Vagas(models.Model):
     escolaridade_minima = models.IntegerField(choices=ESCOLARIDADE_CHOICES)
     requisitos = models.TextField()
     empresa = models.ForeignKey(Empresa, related_name="vagas", on_delete=models.CASCADE)
-
+    data_criacao = models.DateField(auto_now_add=True)
+    
     def __str__(self):
         return self.nome
 
@@ -69,6 +73,7 @@ class Vagas_aplicadas(models.Model):
         Vagas, related_name="vagas_aplicadas", on_delete=models.CASCADE
     )
     pontuacao = models.IntegerField(default=0)
+    data_criacao = models.DateField(auto_now_add=True)
 
     def __str__(self):
         return f"{self.candidato.nome_candidato} - {self.vaga.nome}"

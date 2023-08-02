@@ -11,6 +11,7 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Sum
 from django.urls import reverse
 from django.http import HttpResponse, HttpResponseRedirect
+from datetime import datetime
 
 
 def home(request):
@@ -178,3 +179,17 @@ def vagas_cadastradas(request):
     else:
         context = {}
         return HttpResponseRedirect(reverse("cad_vagas"))
+
+@login_required
+def dashboards(request):
+    current_month = datetime.now().month
+    vagas_criadas = Vagas.objects.filter(empresa__user=request.user, data_criacao__month=current_month).count()
+    candidaturas_recebidas = Vagas_aplicadas.objects.filter(vaga__empresa__user=request.user, data_criacao__month=current_month).count()
+    
+    context = {
+        'vagas_criadas': vagas_criadas,
+        'candidaturas_recebidas': candidaturas_recebidas,
+    }
+
+    return render(request, 'dashboards.html', context)
+

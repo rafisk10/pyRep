@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+
+{%load static%}
+<html>
+<head>
+    <title>Dashboard</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/dashboards.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Dashboard</h1>
+        <div class="chart-container">
+            <canvas id="vagasChart"></canvas>
+        </div>
+        <div class="chart-container">
+            <canvas id="candidaturasChart"></canvas>
+        </div>
+        <div class="back-button">
+            <a href="{% url 'vagas_cadastradas' %}">Voltar para Vagas Cadastradas</a>
+        </div>
+    </div>
+
+    <!-- Include the Charts.js library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        // Sample data for the chart
+        const vagasData = {
+            labels: ['Mes atual'],
+            datasets: [{
+                label: 'Vagas Criadas',
+                data: [{{ vagas_criadas }}],
+                backgroundColor: 'rgba(220, 53, 69, 0.8)',
+                borderColor: 'rgba(220, 53, 69, 1)',
+                borderWidth: 1
+            }]
+        };
+
+        const candidaturasData = {
+            labels: ['Mes atual'],
+            datasets: [{
+                label: 'Candidaturas Recebidas',
+                data: [{{ candidaturas_recebidas }}],
+                backgroundColor: 'rgba(0, 123, 255, 0.8)',
+                borderColor: 'rgba(0, 123, 255, 1)',
+                borderWidth: 1
+            }]
+        };
+
+        // Chart options
+        const chartOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        };
+
+        // Create the Vagas Chart
+        const vagasChartCanvas = document.getElementById('vagasChart').getContext('2d');
+        new Chart(vagasChartCanvas, {
+            type: 'bar',
+            data: vagasData,
+            options: chartOptions
+        });
+
+        // Create the Candidaturas Chart
+        const candidaturasChartCanvas = document.getElementById('candidaturasChart').getContext('2d');
+        new Chart(candidaturasChartCanvas, {
+            type: 'bar',
+            data: candidaturasData,
+            options: chartOptions
+        });
+    </script>
+</body>
+</html>

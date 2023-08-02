@@ -12,7 +12,7 @@ class vagaAdmin(admin.ModelAdmin):
         "escolaridade_minima",
         "requisitos",
         "empresa",
-        "candidatosInscritos",
+        "data_criacao"
     ]
 
 
@@ -25,7 +25,7 @@ class candidatoAdmin(admin.ModelAdmin):
 
 
 class vagas_aplicadasAdmin(admin.ModelAdmin):
-    fields = ["candidato", "vaga", "pontuacao"]
+    fields = ["candidato", "vaga", "pontuacao", "data_criacao"]
 
 
 admin.site.register(Empresa, empresaAdmin)

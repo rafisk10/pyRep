@@ -45,10 +45,22 @@ class Vagas(models.Model):
 
     def __str__(self):
         return self.nome
- 
+
     def save(self, *args, **kwargs):
         super(Vagas, self).save(*args, **kwargs)
-        atualiza_pontuacao(self)
+        candidatos_aplicados = Vagas_aplicadas.objects.filter(vaga=self)
+        for candidato_aplicado in candidatos_aplicados:
+            candidato = candidato_aplicado.candidato
+            pontuacao = 0
+
+            if int(self.faixa_salarial) >= candidato.faixa_salarial:
+                pontuacao += 1
+
+            if candidato.escolaridade_minima >= int(self.escolaridade_minima):
+                pontuacao += 1
+
+            candidato_aplicado.pontuacao = pontuacao
+            candidato_aplicado.save()
 
 
 class Vagas_aplicadas(models.Model):
@@ -60,23 +72,3 @@ class Vagas_aplicadas(models.Model):
 
     def __str__(self):
         return f"{self.candidato.nome_candidato} - {self.vaga.nome}"
-    
-    def save(self, *args, **kwargs):
-        super(Vagas_aplicadas, self).save(*args, **kwargs)
-        atualiza_pontuacao(self.vaga)
-
-
-def atualiza_pontuacao(vaga):
-        candidatos_aplicados = Vagas_aplicadas.objects.filter(vaga=vaga)
-        for candidato_aplicado in candidatos_aplicados:
-            candidato = candidato_aplicado.candidato
-            pontuacao = 0
-
-            if int(vaga.faixa_salarial) <= candidato.faixa_salarial:
-                pontuacao += 1
-
-            if candidato.escolaridade_minima >= int(vaga.escolaridade_minima):
-                pontuacao += 1
-
-            candidato_aplicado.pontuacao = pontuacao
-            candidato_aplicado.save()

@@ -62,7 +62,16 @@ def aplica_vaga(request, vaga_id):
     if ja_aplicada:
         context["mensagem"] = "Você já aplicou para esta vaga!"
     else:
-        vaga_aplicada = Vagas_aplicadas.objects.create(candidato=candidato, vaga=vaga)
+        pontuacao = 0
+
+        if int(vaga.faixa_salarial >= candidato.faixa_salarial):
+            pontuacao += 1
+        if int(candidato.escolaridade_minima >= vaga.escolaridade_minima):
+            pontuacao += 1
+
+        vaga_aplicada = Vagas_aplicadas.objects.create(
+            candidato=candidato, vaga=vaga, pontuacao=pontuacao
+        )
         vaga_aplicada.save()
         context["mensagem"] = "Inscrição confirmada!"
         context["pontuacao"] = vaga_aplicada.pontuacao

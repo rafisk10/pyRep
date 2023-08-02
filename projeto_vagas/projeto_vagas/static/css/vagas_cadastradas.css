@@ -1,0 +1,107 @@
+/* vagas_cadastradas.css */
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f1f1f1;
+  margin: 0;
+  padding: 0;
+}
+  
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.vagas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-gap: 20px;
+}
+
+.vaga {
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.vaga h2 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.vaga p {
+  margin: 5px 0;
+}
+
+.vaga button {
+  display: block;
+  margin-top: 10px;
+  padding: 10px 15px;
+  background-color: #dc3545;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  
+}
+.vaga a{
+  text-decoration: none;
+}
+
+.vaga button:hover {
+  background-color: #c82333;
+}
+
+.logout-button {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.logout-button a {
+  text-decoration: none;
+}
+
+.logout-button button {
+  padding: 10px 15px;
+  background-color: #dc3545;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.cadastro_vaga-button button:hover {
+  background-color: #c82333;
+}
+.cadastro_vaga-button {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.cadastro_vaga-button a {
+  text-decoration: none;
+}
+
+.cadastro_vaga-button button {
+  padding: 10px 15px;
+  background-color: #dc3545;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.cadastro_vaga-button button:hover {
+  background-color: #c82333;
+}
+

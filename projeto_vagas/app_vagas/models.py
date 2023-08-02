@@ -40,28 +40,30 @@ class Vagas(models.Model):
     escolaridade_minima = models.IntegerField(choices=ESCOLARIDADE_CHOICES)
     requisitos = models.TextField()
     empresa = models.ForeignKey(Empresa, related_name='vagas', on_delete=models.CASCADE)
-    candidatosInscritos = models.IntegerField(default=0)
-    
     
     def __str__(self):
         return self.nome
     
+    def save(self, *args, **kwargs):
+        super(Vagas, self).save(*args, **kwargs)
+        candidatos_aplicados = Vagas_aplicadas.objects.filter(vaga=self)
+        for candidato_aplicado in candidatos_aplicados:
+            candidato = candidato_aplicado.candidato
+            pontuacao = 0
+
+            if int(self.faixa_salarial) == candidato.faixa_salarial:
+                pontuacao += 1
+
+            if candidato.escolaridade_minima >= int(self.escolaridade_minima):
+                pontuacao += 1
+                
+            candidato_aplicado.pontuacao = pontuacao
+            candidato_aplicado.save()
+    
 class Vagas_aplicadas(models.Model):
     candidato = models.ForeignKey(Candidato, on_delete=models.CASCADE)
-    vaga = models.ForeignKey(Vagas, related_name='Vagas_aplicadas', on_delete=models.CASCADE)
+    vaga = models.ForeignKey(Vagas, related_name='vagas_aplicadas', on_delete=models.CASCADE)
     pontuacao = models.IntegerField(default=0)
 
     def __str__(self):
-        return f'{self.candidato.nome_candidato} - {self.vaga.nome}'
-    
-    def save(self, *args, **kwargs):
-        pontuacao = 0
-
-        if self.vaga.faixa_salarial == self.candidato.faixa_salarial:
-            pontuacao += 1
-
-        if self.candidato.escolaridade_minima >= self.vaga.escolaridade_minima:
-            pontuacao += 1
-
-        self.pontuacao = pontuacao
-        super(Vagas_aplicadas, self).save(*args, **kwargs)
+        return f'{self.candidato.nome_candidato} - {self.vaga.nome}'      

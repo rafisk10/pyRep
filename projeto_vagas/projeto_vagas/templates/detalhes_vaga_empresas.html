@@ -1,0 +1,40 @@
+
+<!DOCTYPE html>
+{%load static%}
+<html>
+<head>
+    <title>Detalhes da Vaga</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/detalhes_vaga.css' %}">
+</head>
+<body>
+    <div class="container">
+        {% if aviso %}
+        <p class="aviso" id="aviso">{{ aviso }}</p>  
+        {% endif %}
+        <h1>Detalhes da Vaga: {{ vaga.nome }}</h1>
+        <p>Salário: {{ vaga.get_faixa_salarial_display }}</p>
+        <p>Escolaridade Mínima: {{ vaga.get_escolaridade_minima_display}}</p>
+        
+        <h2>Candidatos Interessados</h2>
+        <div class="candidatos">
+            {% for candidato in candidatos %}
+            <div class="candidato">
+                <h3>{{ candidato.nome_candidato }}</h3>
+                <p>Faixa Salarial Desejada: {{ candidato.get_faixa_salarial_display }}</p>
+                <p>Escolaridade Mínima: {{ candidato.get_escolaridade_minima_display }}</p>
+                <p>Email: {{ candidato.user.email }}</p>
+                <p>Pontuação: {{ candidato.pontuacao }}</p>
+            </div>
+            {% endfor %}
+        </div>
+        <a href="{% url 'edita_vaga' vaga.id %}">
+            <button>Editar vaga</button>
+        </a>
+
+        <a href="{% url 'vagas_cadastradas' %}">
+            <button>Voltar</button>
+        </a>
+    </div>
+    
+</body>
+</html>

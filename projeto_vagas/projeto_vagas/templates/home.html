@@ -1,0 +1,21 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+
+{% load static %}
+<html>
+<head>
+    <title>Página Inicial</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Bem-vindo ao Sistema de Vagas</h1>
+        <div class="buttons">
+            <a class="login-button" href="{% url 'login' %}">Login</a>
+            <a class="vagas-button" href="{% url 'vagas' %}">Vagas Cadastradas</a>
+        </div>
+    </div>
+</body>
+</html>

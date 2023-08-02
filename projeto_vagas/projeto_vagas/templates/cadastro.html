@@ -11,6 +11,9 @@
 <body>
     <div class="container">
         <h1>Cadastro</h1>
+        {% if aviso %}
+        <p class="aviso" id="aviso">{{ aviso }}</p>
+        {% endif %}
         <div class="form">
             <div class="toggle">
                 <button id="candidatoBtn" onclick="toggleForm('candidato')">Candidato</button>
@@ -74,6 +77,15 @@
     </div>
 
     <script>
+        const errorMessage = document.getElementById('aviso');
+
+        if (errorMessage) {
+            setTimeout(() => {
+                errorMessage.style.display = 'none';
+            }, 5000);
+            errorMessage.style.color = 'red';
+        }
+
         function toggleForm(formType) {
             const candidatoForm = document.getElementById("candidatoForm");
             const empresaForm = document.getElementById("empresaForm");

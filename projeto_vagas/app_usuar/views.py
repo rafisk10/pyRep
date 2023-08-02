@@ -19,7 +19,11 @@ def login(request):
         
         if user: 
             login_django(request, user)
-            return redirect(reverse('vagas'))
+            candidato = hasattr(request.user, 'candidato')
+            if candidato:
+                return redirect(reverse('vagas'))
+            else:
+                return redirect(reverse('vagas_cadastradas'))
         else:
             return render(request, 'login.html', {'error_message': 'Usuário ou senha inválidos'})
     
@@ -43,14 +47,15 @@ def cadastro(request):
         
         user = User.objects.filter(username = username).first()
         if user:
-            return HttpResponse("Usuario ja cadastrado")
+            context['aviso'] = "Usuario ja cadastrado"
+            return render(request, 'cadastro.html', context)
         
         if sobrenome is None:
             nome_empresa = request.POST.get('nome_empresa')
             user = User.objects.create_user(username=username, email=email, password= senha)
             empresa = Empresa.objects.create(user = user,nome_empresa = nome_empresa  )
             empresa.save()
-            return HttpResponseRedirect(reverse('vagas'))
+            return HttpResponseRedirect(reverse('login'))
         else:
             sobrenome = request.POST.get('last_name')
             nome_candidato = nome + ' ' + sobrenome
@@ -58,7 +63,7 @@ def cadastro(request):
             candidato = Candidato.objects.create(user = user, nome_candidato = nome_candidato, faixa_salarial = faixa_salarial_escolhida, escolaridade_minima = escolaridade_minima_escolhida )
             candidato.save()
             
-            return HttpResponseRedirect(reverse('vagas'))
+            return HttpResponseRedirect(reverse('login'))
             
         
     

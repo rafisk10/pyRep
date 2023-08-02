@@ -19,6 +19,9 @@
                 </a>
             </div>
             {% endfor %}
+            {%if mensagem%}
+            <p>{{mensagem}}</p>
+            {% endif %}
         </div>
         <div class="logout-button">
             <a href="{% url 'logout_view' %}">

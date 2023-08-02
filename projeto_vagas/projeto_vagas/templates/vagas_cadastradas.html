@@ -2,19 +2,22 @@
 {%load static%}
 <html>
 <head>
-    <title>Vagas Disponíveis</title>
+    <title>Vagas Cadastradas</title>
     <link rel="stylesheet" type="text/css" href="{% static 'css/vagas_cadastradas.css' %}">
 </head>
 <body>
     <div class="container">
-        <h1>Vagas Disponíveis</h1>
+        {% if aviso %}
+        <p class="aviso" id="aviso">{{ aviso }}</p>  
+        {% endif %}
+        <h1>Vagas Cadastradas</h1>
         <div class="vagas">
             {% for vaga in vagas %}
             <div class="vaga">
                 <h2>{{ vaga.nome }}</h2>
                 <p>Salário: {{ vaga.get_faixa_salarial_display }}</p>
                 <p>Escolaridade Mínima: {{ vaga.get_escolaridade_minima_display}}</p>
-                <a href="{% url 'detalhes_vaga' vaga.id %}">
+                <a href="{% url 'detalhes_vaga_empresas' vaga.id %}">
                     <button>Ver detalhes</button>
                 </a>
             </div>
@@ -25,7 +28,11 @@
                 <button>Sair</button>
             </a>
         </div>
-        
+        <div class="cadastro_vaga-button">
+            <a href="{% url 'cad_vagas' %}">
+                <button>Cadastrar nova vaga</button>
+            </a>
+        </div>
     </div>    
 </body>
 </html>

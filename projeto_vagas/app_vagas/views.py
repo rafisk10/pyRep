@@ -41,7 +41,7 @@ def detalhes_vaga(request, vaga_id):
     else:
         context[
             "mensagem"
-        ] = "Você deve estar logado pra visualizar os detalhes das vagas"
+        ] = "Você deve estar logado para visualizar os detalhes das vagas"
         return render(request, "vagas.html", context)
 
 

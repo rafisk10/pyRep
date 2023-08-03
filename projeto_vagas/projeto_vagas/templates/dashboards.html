@@ -20,14 +20,14 @@
         </div>
     </div>
 
-    <!-- Include the Charts.js library -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <script>
-        // Sample data for the chart
         const vagasData = {
             labels: ['Mes atual'],
             datasets: [{
+                barPercentage: 2,
+                barThickness: 250,
                 label: 'Vagas Criadas',
                 data: [{{ vagas_criadas }}],
                 backgroundColor: 'rgba(220, 53, 69, 0.8)',
@@ -39,6 +39,7 @@
         const candidaturasData = {
             labels: ['Mes atual'],
             datasets: [{
+                barThickness: 250,
                 label: 'Candidaturas Recebidas',
                 data: [{{ candidaturas_recebidas }}],
                 backgroundColor: 'rgba(0, 123, 255, 0.8)',
@@ -47,18 +48,20 @@
             }]
         };
 
-        // Chart options
         const chartOptions = {
             responsive: true,
             maintainAspectRatio: false,
             scales: {
                 y: {
-                    beginAtZero: true
+                    beginAtZero: true,
+                    grace:'5%',
+                    ticks:{
+                        stepSize:1
+                    }
                 }
             }
         };
 
-        // Create the Vagas Chart
         const vagasChartCanvas = document.getElementById('vagasChart').getContext('2d');
         new Chart(vagasChartCanvas, {
             type: 'bar',
@@ -66,7 +69,7 @@
             options: chartOptions
         });
 
-        // Create the Candidaturas Chart
+
         const candidaturasChartCanvas = document.getElementById('candidaturasChart').getContext('2d');
         new Chart(candidaturasChartCanvas, {
             type: 'bar',
